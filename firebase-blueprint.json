@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "Prompt": {
+      "title": "Prompt",
+      "description": "An AI prompt stored in the 매운탕 prompt collection app.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The prompt title displayed on cards and in the detail modal.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "category": {
+          "type": "string",
+          "description": "One of the three prompt categories.",
+          "enum": ["사진 합성", "스타일 변환", "캐릭터·포스터"]
+        },
+        "content": {
+          "type": "string",
+          "description": "The full multi-line prompt text (supports >1,000 characters, up to 10,000).",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the prompt was created, used for ascending creation order."
+        }
+      },
+      "required": ["title", "category", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/prompts/{promptId}": {
+      "schema": {
+        "$ref": "#/entities/Prompt"
+      },
+      "description": "Collection of AI prompts ordered by creation time ascending."
+    }
+  }
+}
